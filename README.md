@@ -1,5 +1,6 @@
 # Endeavour
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Coverage Status](https://coveralls.io/repos/github/TobyColeman/endeavour/badge.svg?branch=master)](https://coveralls.io/github/TobyColeman/endeavour?branch=master)
 [![CircleCI](https://circleci.com/gh/TobyColeman/endeavour.svg?style=svg)](https://circleci.com/gh/TobyColeman/endeavour)
 
 Flexible, fault-tolerant operations for Typescript.
