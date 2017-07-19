@@ -24,14 +24,33 @@
   },
   "nyc": {
     "watermarks": {
-      "lines": [80, 95],
-      "functions": [80, 95],
-      "branches": [80, 95],
-      "statements": [80, 95]
+      "lines": [
+        80,
+        95
+      ],
+      "functions": [
+        80,
+        95
+      ],
+      "branches": [
+        80,
+        95
+      ],
+      "statements": [
+        80,
+        95
+      ]
     },
-    "extension": [".ts", ".tsx"],
-    "exclude": ["**/*.d.ts"],
-    "require": ["ts-node/register"]
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "repository": {
     "type": "git",
@@ -48,6 +67,7 @@
     "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.10",
     "chai": "^4.1.0",
+    "coveralls": "^2.13.1",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "nyc": "^11.0.3",
