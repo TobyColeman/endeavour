@@ -1,4 +1,6 @@
-# endeavour
+# Endeavour
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 Flexible, fault-tolerant operations for Typescript.
 
 ## Requirements
@@ -28,7 +30,7 @@ async function main () {
   let result
 
   try {
-    result = faultTolerant()
+    result = await faultTolerant()
   } catch (error) {
     console.log(error)
   }
@@ -49,6 +51,22 @@ Creates a new `EndeavourRunnable`; a wrapped version of your function that will 
 
 You may also specify `this` (useful for wrapping instance methods).
 
+```typescript
+class Thing {
+  doSomethingUnreliable () {}
+}
+
+const instance = new Thing()
+
+const faultTolerant = endeavour(instance.doSomethingUnreliable, instance)
+
+faultTolerant()
+  .then(res => { console.log('yay!') })
+  .catch(e => { console.log(':(')) })
+```
+
+See the [decorators](#decorators) section for a more terse way of handling these cases.
+
 ### EndeavourRunnable([arguments], [intercept])
 Using your wrapped function from `endeavour(...)` works much in the same way as before. Arguments are be passed like this:
 
@@ -61,7 +79,7 @@ The wrapped operation also accepts and optional function to allow for greater co
 ```typescript
 faultTolerantOperation((result, next) => {
   if (result.error instanceof MyCustomError) {
-    return nex(new Error('something went horribly wrong :('))
+    return next(new Error('something went horribly wrong :('))
   }
 })
 ```
@@ -73,6 +91,13 @@ faultTolerantOperation((result, next) => {
   if (result.error instanceof MyCustomError) {
     return next(['new', 'args'])
   }
+})
+```
+
+You could also just inspect the result of the last attempt.
+```typescript
+faultTolerantOperation(result => {
+  console.log(result.error)
 })
 ```
 
@@ -98,10 +123,12 @@ class {
   @endeavourify({ retries: 5 })
   doSomething () { }
 
-  // retries 10 times
+  // retried 10 times
   @endeavourify()
   otherThing() { }
 }
 ``` 
 
 When no arguments are given to `@endeavourable` or `@endeavourify`, the defaults provided [here](#endeavourthenablefunction-options-ctx) will be used.
+
+Want something for plain old JS? Check out [node-retry](https://github.com/tim-kos/node-retry).
